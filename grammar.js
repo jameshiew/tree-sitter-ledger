@@ -337,18 +337,28 @@ module.exports = grammar({
           repeat(/[^\n]/),
         ),
 
+        // Trailing blanks before the newline are tolerated (editors commonly
+        // hold a single trailing space mid-edit), but only when no note is
+        // present: a note runs to the end of the line, and a whitespace slot
+        // after it would let the lexer steal spaces from the note's content.
         posting: $ => seq(
             $.whitespace,
             optional(seq($.status, optional($.whitespace))),
             $.account,
-            optional(seq(
-                $.spacer,
-                optional(seq(optional($.whitespace), $.amount)),
-                optional(seq(optional($.whitespace), $.lot_price)),
-                optional(seq(optional($.whitespace), $.price)),
-                optional(seq(optional($.whitespace), $.balance_assertion)),
-                optional(seq(optional($.whitespace), $.note)),
-            )),
+            choice(
+                seq(
+                    $.spacer,
+                    optional(seq(optional($.whitespace), $.amount)),
+                    optional(seq(optional($.whitespace), $.lot_price)),
+                    optional(seq(optional($.whitespace), $.price)),
+                    optional(seq(optional($.whitespace), $.balance_assertion)),
+                    choice(
+                        seq(optional($.whitespace), $.note),
+                        optional($.whitespace),
+                    ),
+                ),
+                optional($.whitespace),
+            ),
             '\n'),
 
         account: $ => alias(choice(

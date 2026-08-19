@@ -64,7 +64,6 @@ periodic transactions require interval
 
 (source_file
   (ERROR
-    (ERROR)
     (UNEXPECTED ':')
     (UNEXPECTED ':')))
 
