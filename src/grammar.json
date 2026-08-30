@@ -2613,7 +2613,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "\\d([\\d., ]*\\d)?"
+        "value": "\\d([\\d., ]*[\\d.,])?"
       }
     },
     "quantity": {

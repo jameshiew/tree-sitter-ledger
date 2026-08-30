@@ -580,6 +580,36 @@ trailing whitespace after account
           (account))))))
 
 ================================================================================
+quantities ending in decimal marks
+================================================================================
+2026-10-10 fake
+    expenses:general                                     -203.14 GBP
+    assets:d2d:monzo:current  332.
+    assets:d2d:monzo:savings  332,
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (journal_item
+    (xact
+      (plain_xact
+        (date)
+        (payee)
+        (posting
+          (account)
+          (amount
+            (negative_quantity)
+            (commodity)))
+        (posting
+          (account)
+          (amount
+            (quantity)))
+        (posting
+          (account)
+          (amount
+            (quantity)))))))
+
+================================================================================
 trailing whitespace after amount
 ================================================================================
 2020-12-02

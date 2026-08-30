@@ -391,7 +391,7 @@ module.exports = grammar({
             )
         },
 
-        _quantity: $ => token(/\d([\d., ]*\d)?/),
+        _quantity: $ => token(/\d([\d., ]*[\d.,])?/),
         quantity: $ => $._quantity,
         negative_quantity: $ => $._quantity,
 
